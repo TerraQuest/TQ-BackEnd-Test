@@ -1,20 +1,26 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# TQ Backend Interview Tasks
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+This application is a simple API that allows a caller to see users and messages and top create new users.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+It uses EntityFramework for data access.
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+This is version 0.1 of the app and the app is going to get a lot bigger, with many more operations and queries expected to be added to it. The solution is currently very simple but will be required to support many more entities and complex business roles. It will be critical to the business, which will expect the solution to be robust and reliable.
+  
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+# Instructions
+
+The application has been created by a naive developer and has not yet been deployed to a production environment. The developer would like you to review the code and the architecture. He wants to know not just what is wrong but how could the solution be better.  
+
+Create a PR for this code.
+Review the existing code with regards to:
+
+- Clean-coding 
+- SOLID principles 
+- Security
+- Performance
+- Maintainability
+
+Also, give any suggestions you may have on how the architecture might be improved.   
+ 
+ 
+ 
