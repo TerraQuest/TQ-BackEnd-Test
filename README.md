@@ -1,6 +1,6 @@
 # TQ Backend Interview Tasks
 
-This application is a simple API that allows a caller to see users and messages and top create new users.
+This application is a simple API that allows a caller to see users and messages and to create new users.
 
 It uses EntityFramework for data access.
 
