@@ -1,8 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using TQ.Entites;
 
-namespace TestAppApi.Controllers
+namespace TQ.DAL
 {
-    public class ChatDbContext : DbContext
+   public class ChatDbContext : DbContext
     {
         public ChatDbContext(DbContextOptions options) : base(options)
         {
@@ -12,4 +16,5 @@ namespace TestAppApi.Controllers
         public DbSet<ChatUser> Users { get; set; }
         public DbSet<ChatMessage> Messages { get; set; }
     }
+    
 }

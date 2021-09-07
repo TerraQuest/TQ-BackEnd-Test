@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace TestAppApi.Controllers
+namespace TQ.Services
 {
-    public class WorkerTallyCounter
+   public class WorkerTallyCounter
     {
-
         public static Task<int> TallyCounterAsync(int count, Func<bool> find)
         {
             int counter = 0;
@@ -41,5 +42,6 @@ namespace TestAppApi.Controllers
 
             return Task.FromResult(counter);
         }
+
     }
 }

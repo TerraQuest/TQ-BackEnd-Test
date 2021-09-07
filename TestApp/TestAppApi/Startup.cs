@@ -14,6 +14,9 @@ using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using TestAppApi.Controllers;
+using TQ.BAL;
+using TQ.DAL;
+using TQ.Entites;
 
 namespace TestAppApi
 {
@@ -35,6 +38,7 @@ namespace TestAppApi
                 var builder = new DbContextOptionsBuilder<ChatDbContext>()
                     .UseSqlite(CreateConnection());
                 
+
                 var db = new ChatDbContext(builder.Options);
                 db.Database.OpenConnection();
                 db.Database.EnsureCreated();
@@ -42,6 +46,7 @@ namespace TestAppApi
                 return db;
 
             });
+            services.AddScoped<IUsersRepository, UsersRepository>();
         }
 
         private static readonly string dbId = Guid.NewGuid().ToString();

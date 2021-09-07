@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -6,16 +6,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.7" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TQ.BAL\TQ.BAL.csproj" />
-    <ProjectReference Include="..\TQ.Common\TQ.Common.csproj" />
-    <ProjectReference Include="..\TQ.DAL\TQ.DAL.csproj" />
     <ProjectReference Include="..\TQ.Entites\TQ.Entites.csproj" />
-    <ProjectReference Include="..\TQ.Services\TQ.Services.csproj" />
   </ItemGroup>
-
 
 </Project>

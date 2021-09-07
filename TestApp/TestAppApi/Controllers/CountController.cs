@@ -5,6 +5,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Diagnostics;
+using TQ.Entites;
+using TQ.BAL;
+using TQ.Services;
 
 namespace TestAppApi.Controllers
 {
@@ -12,56 +15,60 @@ namespace TestAppApi.Controllers
     [Route("[controller]")]
     public class ChatController : ControllerBase
     {
-        private readonly ChatDbContext _dbContext;
-
-        public ChatController(ChatDbContext dbContext)
+       
+        private readonly IUsersRepository _users;
+        private readonly ILogger _logger;
+        public ChatController(IUsersRepository users,ILogger logger)
         {
-            _dbContext = dbContext;
+            _users = users;
+            _logger = logger;
         }
 
         [HttpGet("/messages")]
         public ActionResult<ChatMessage[]> Get()
         {
-            return ChatRepository.Instance.Messages.ToArray();
+            return ChatService.Instance.Messages.ToArray();
         }
 
-        [HttpGet("/counter")]
-        public async Task<ActionResult<int>> Get(int iterations, CancellationToken token=default)
+        [HttpGet("/counter/{iterations?}")]
+        public async Task<ActionResult<int>> Get(int? iterations, CancellationToken token=default)
         {
-            var task = await WorkerTallyCounter.TallyCounterAsync(iterations, () => true);
+            var task = await WorkerTallyCounter.TallyCounterAsync(iterations??0, () => true);
 
             return task;
         }
 
         [HttpGet("/users")]
-        public ActionResult<GetUsersResponse> Get([FromBody] GetUsersRequest request)
+        public async Task<ActionResult<GetUsersResponse>> Get([FromBody] GetUsersRequest request)
         {
-            var response = new GetUsersResponse
+            GetUsersResponse getUsersResponse=new GetUsersResponse(); 
+            try
             {
-                Users = _dbContext.Users
-                    .GroupBy(user => user.UserName)
-                    .Select(grouping => new GetUsersResponseItem { Name = grouping.Key, Count = grouping.Count() })
-                    .ToArray()
-                    .Where(user => user.Name.Contains(request.MatchingName))
-                    .OrderBy(user => user.Count)
-            };
+                getUsersResponse= await _users.Get(request);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error while getting response : {ex.Message}");
+            }
 
-            return response;
+            return getUsersResponse;
         }
 
         [HttpPost("/users")]
         public ActionResult<int> Create(string userName)
         {
-            var newUser = new ChatUser
+            int result = 0;
+            try
             {
-                UserName = userName,
-            };
+                result= _users.Create(userName);
+            }
+            catch (Exception ex)
+            {
 
-            _dbContext.Users.Add(newUser);
-
-            _dbContext.SaveChanges();
-
-            return newUser.Id;
+                _logger.LogError($"Error while creating user : {ex.Message}");
+            }
+            return result;
+          
         }
     }
 }
